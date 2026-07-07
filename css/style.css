@@ -808,3 +808,46 @@ ul{ margin:0; padding:0; list-style:none; }
   .admin-stats{ grid-template-columns:1fr 1fr; }
   .shop-filters{ justify-content:flex-start; }
 }
+
+
+/* ===== Mobile Hero Fix ===== */
+@media (max-width:768px){
+
+  .hero{
+    min-height:100svh;
+    padding:110px 20px 60px;
+  }
+
+  .hero-glow{
+    width:520px;
+    height:520px;
+    top:-40px;
+    opacity:.45;
+  }
+
+  .hero-grid{
+    opacity:.45;
+  }
+
+  .fig{
+    opacity:.35;
+    filter:none !important;
+  }
+
+  .fig-tl,
+  .fig-tr{
+    width:95px;
+    height:170px;
+  }
+
+  .fig-l1,
+  .fig-r1{
+    width:120px;
+    height:250px;
+  }
+
+  .fig-l2,
+  .fig-r2{
+    display:none;
+  }
+}
