@@ -954,3 +954,40 @@
 
   init();
 })();
+
+/* ===========================
+   Galaxy Stars
+=========================== */
+
+const stars = document.getElementById("stars");
+
+for(let i=0;i<120;i++){
+
+const star=document.createElement("span");
+
+star.classList.add("star");
+
+const r=Math.random();
+
+if(r>0.8){
+
+star.classList.add("big");
+
+}
+else if(r>0.55){
+
+star.classList.add("medium");
+
+}
+
+star.style.left=Math.random()*100+"%";
+
+star.style.top=Math.random()*100+"%";
+
+star.style.animationDuration=(6+Math.random()*8)+"s";
+
+star.style.animationDelay=Math.random()*6+"s";
+
+stars.appendChild(star);
+
+}
