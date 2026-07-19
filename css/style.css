@@ -360,7 +360,7 @@ z-index:0;
 @keyframes scrollLine{ 0%,100%{ transform:scaleY(1); opacity:.4;} 50%{ transform:scaleY(1.4); opacity:1;} }
 
 /* ---- Hero character silhouettes (original geometric figures, no licensed art) ---- */
-.hero-figures{ position:absolute; inset:0; z-index:2; pointer-events:none; }
+.hero-figures{ position:absolute; inset:0; z-index:2; pointer-events:none; display: none;}
 .fig{
   position:absolute;
   background:linear-gradient(155deg, var(--onyx-2) 0%, var(--void) 65%);
