@@ -303,6 +303,11 @@
      8. NAVBAR SCROLL STATE + MOBILE MENU
      ------------------------------------------------------------------ */
   const navbar = document.getElementById('navbar');
+
+  const navBurger = document.getElementById("navBurger");
+  const navLinks = document.getElementById("navLinks");
+
+
   window.addEventListener('scroll', () => {
     navbar.classList.toggle('scrolled', window.scrollY > 40);
   }, { passive: true });
