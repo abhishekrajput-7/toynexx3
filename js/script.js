@@ -18,7 +18,35 @@
   ];
 
   const PRODUCTS = [
-    { id: 'p01', name: 'Crimson Sentinel',  category: 'Superhero Icons', price: 6499, oldPrice: 7999, edition: 47,  total: 500, tag: 'New',      rating: 4.6, sold: 320,  added: 12, desc: 'A vigilant guardian sculpted mid-leap, cast in matte resin with hand-painted crimson accents.' },
+    
+   {
+    id: "dbz001",
+
+    name: "Goku Super Saiyan 2 with White Stand Action Figure",
+
+    category: "Anime Legends",
+
+    price: 499,
+
+    oldPrice: null,
+
+    edition: 1,
+
+    total: 100,
+
+    tag: "New",
+
+    rating: 5,
+
+    sold: 0,
+
+    added: 12,
+
+    image: "Images/Dragon Ball Z/goku-ssj2-white-stand-1.png",
+
+    desc: "Premium Dragon Ball Z Goku Super Saiyan 2 action figure with white display stand."
+},
+
     { id: 'p02', name: 'Void Ronin',        category: 'Anime Legends',   price: 5299, oldPrice: null, edition: 112, total: 800, tag: null,        rating: 4.3, sold: 540,  added: 9,  desc: 'A lone blade-wielder frozen in a decisive stance, finished with a weathered steel palette.' },
     { id: 'p03', name: 'Iron Marshal',      category: 'Superhero Icons', price: 8999, oldPrice: null, edition: 9,   total: 250, tag: 'Bestseller',rating: 4.9, sold: 890,  added: 3,  desc: 'Heavy-plated armor sculpt with articulated joints and illuminated chest core detailing.' },
     { id: 'p04', name: 'Solar Guardian',    category: 'Anime Legends',   price: 4799, oldPrice: 5499, edition: 233, total: 1000,tag: 'Sale',      rating: 4.1, sold: 610,  added: 11, desc: 'Radiant energy aura base included. A fan-favorite pose recreated in premium PVC.' },
