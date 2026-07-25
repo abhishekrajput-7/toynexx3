@@ -989,3 +989,9 @@ opacity:.2;
 }
 
 }
+.qv-main-image{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    display:block;
+}
