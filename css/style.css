@@ -1023,3 +1023,36 @@ opacity:.2;
 .qv-thumb.active{
     border-color:#FFD600;
 }
+
+.qv-image-container{
+    position:relative;
+}
+
+.qv-nav{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    width:42px;
+    height:42px;
+    border:none;
+    border-radius:50%;
+    background:rgba(0,0,0,.6);
+    color:#fff;
+    cursor:pointer;
+    font-size:20px;
+    transition:.3s;
+    z-index:10;
+}
+
+.qv-prev{
+    left:10px;
+}
+
+.qv-next{
+    right:10px;
+}
+
+.qv-nav:hover{
+    background:#FFD600;
+    color:#000;
+}
