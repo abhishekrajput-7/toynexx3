@@ -121,3 +121,19 @@ flex-direction:column;
 }
 
 }
+
+.thumb{
+    width:80px;
+    height:80px;
+    object-fit:contain;
+    cursor:pointer;
+    border:2px solid #333;
+    border-radius:10px;
+    background:#111;
+    padding:6px;
+    transition:.3s;
+}
+
+.thumb:hover{
+    border-color:#FFD600;
+}
