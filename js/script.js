@@ -171,7 +171,9 @@
         <div class="pc-media">
           ${p.tag ? `<span class="pc-badge">${p.tag}</span>` : ''}
           <span class="pc-edition">Edition<b>${p.edition}/${p.total}</b></span>
-          ${figureThumb()}
+          <div class="pc-image">
+           <img src="${p.image}" alt="${p.name}" loading="lazy">
+             </div>
           <div class="pc-quick">
             <button class="pc-icon-btn pc-quickview" title="Quick View" aria-label="Quick View">
               <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7z"/></svg>
@@ -944,8 +946,7 @@
     renderCart();
     renderWishlist();
     startCountdown();
-    initHeroParallax();
-    observeReveals();
+    initHeroParallax();    observeReveals();
 
     window.addEventListener('load', () => {
       setTimeout(() => document.getElementById('preloader').classList.add('done'), 400);
