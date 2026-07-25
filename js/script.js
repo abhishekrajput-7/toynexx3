@@ -357,15 +357,18 @@
     navbar.classList.toggle('scrolled', window.scrollY > 40);
   }, { passive: true });
 
-  const navBurger = document.getElementById('navBurger');
-  const navLinks = document.getElementById('navLinks');
-  navBurger.addEventListener('click', () => {
-    const isOpen = navLinks.classList.toggle('open');
-    navBurger.setAttribute('aria-expanded', isOpen);
-  });
-  navLinks.querySelectorAll('.nav-link').forEach(link => {
-    link.addEventListener('click', () => navLinks.classList.remove('open'));
-  });
+if (navBurger && navLinks) {
+
+    navBurger.addEventListener('click', () => {
+        const isOpen = navLinks.classList.toggle('open');
+        navBurger.setAttribute('aria-expanded', isOpen);
+    });
+
+    navLinks.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => navLinks.classList.remove('open'));
+    });
+
+}
 
   /* ------------------------------------------------------------------
      9. SEARCH OVERLAY
@@ -375,21 +378,38 @@
   const searchResults = document.getElementById('searchResults');
   let searchFilter = 'all';
 
-  document.getElementById('searchBtn').addEventListener('click', () => {
-    searchOverlay.classList.add('open');
-    setTimeout(() => searchInput.focus(), 300);
-    runSearch();
-  });
-  document.getElementById('searchClose').addEventListener('click', () => searchOverlay.classList.remove('open'));
-  searchInput.addEventListener('input', runSearch);
-  document.querySelectorAll('.search-filters .chip').forEach(chip => {
-    chip.addEventListener('click', () => {
-      document.querySelectorAll('.search-filters .chip').forEach(c => c.classList.remove('active'));
-      chip.classList.add('active');
-      searchFilter = chip.dataset.filter;
-      runSearch();
+  if (
+    searchOverlay &&
+    searchInput &&
+    searchResults &&
+    document.getElementById('searchBtn') &&
+    document.getElementById('searchClose')
+) {
+
+    document.getElementById('searchBtn').addEventListener('click', () => {
+        searchOverlay.classList.add('open');
+        setTimeout(() => searchInput.focus(), 300);
+        runSearch();
     });
-  });
+
+    document.getElementById('searchClose').addEventListener('click', () =>
+        searchOverlay.classList.remove('open')
+    );
+
+    searchInput.addEventListener('input', runSearch);
+
+    document.querySelectorAll('.search-filters .chip').forEach(chip => {
+        chip.addEventListener('click', () => {
+            document.querySelectorAll('.search-filters .chip')
+                .forEach(c => c.classList.remove('active'));
+
+            chip.classList.add('active');
+            searchFilter = chip.dataset.filter;
+            runSearch();
+        });
+    });
+
+}
 
   function runSearch() {
     const q = searchInput.value.trim().toLowerCase();
