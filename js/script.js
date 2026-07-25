@@ -650,6 +650,37 @@
     >
 `;
 
+const thumbs = document.getElementById("qvThumbs");
+
+thumbs.innerHTML = "";
+
+(p.gallery || [p.image]).forEach((img, index) => {
+
+    thumbs.innerHTML += `
+        <img
+            src="${img}"
+            class="qv-thumb ${index===0 ? "active" : ""}"
+            data-img="${img}"
+        >
+    `;
+
+});
+
+thumbs.querySelectorAll(".qv-thumb").forEach(thumb=>{
+
+    thumb.addEventListener("click",()=>{
+
+        document.querySelector(".qv-main-image").src = thumb.dataset.img;
+
+        thumbs.querySelectorAll(".qv-thumb")
+              .forEach(t=>t.classList.remove("active"));
+
+        thumb.classList.add("active");
+
+    });
+
+});
+
     document.getElementById('qvEdition').innerHTML = `Numbered Edition<b>${p.edition} / ${p.total}</b>`;
     document.getElementById('qvQty').textContent = qvQty;
     qvOverlay.classList.add('open');
