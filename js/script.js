@@ -641,7 +641,15 @@
     document.getElementById('qvName').textContent = p.name;
     document.getElementById('qvPrice').textContent = money(p.price);
     document.getElementById('qvDesc').textContent = p.desc;
-    document.getElementById('qvImage').innerHTML = figureThumb();
+
+    document.getElementById('qvImage').innerHTML = `
+    <img
+        src="${p.image}"
+        alt="${p.name}"
+        class="qv-main-image"
+    >
+`;
+
     document.getElementById('qvEdition').innerHTML = `Numbered Edition<b>${p.edition} / ${p.total}</b>`;
     document.getElementById('qvQty').textContent = qvQty;
     qvOverlay.classList.add('open');
