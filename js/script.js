@@ -18,7 +18,7 @@
   ];
 
   const PRODUCTS = [
-    
+
    {
     id: "dbz001",
 
@@ -43,6 +43,15 @@
     added: 12,
 
     image: "Images/Dragon Ball Z/goku-ssj2-white-stand-1.png",
+
+    gallery: [
+    "Images/Dragon Ball Z/goku-ssj2-white-stand-1.png",
+    "Images/Dragon Ball Z/goku-ssj2-white-stand-2.png",
+    "Images/Dragon Ball Z/goku-ssj2-white-stand-3.png",
+    "Images/Dragon Ball Z/goku-ssj2-white-stand-4.png",
+    "Images/Dragon Ball Z/goku-ssj2-white-stand-5.png",
+    "Images/Dragon Ball Z/goku-ssj2-white-stand-6.png"
+    ],
 
     desc: "Premium Dragon Ball Z Goku Super Saiyan 2 action figure with white display stand."
 },
