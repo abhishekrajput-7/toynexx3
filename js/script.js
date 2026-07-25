@@ -241,6 +241,18 @@
 
     grid.querySelectorAll('.product-card').forEach(card => {
       const id = card.dataset.id;
+
+      card.addEventListener("click", (e) => {
+
+    // Agar Quick View ya Cart ya Wishlist button dabaya hai to page open mat karo
+    if (e.target.closest(".pc-icon-btn") || e.target.closest(".pc-add")) {
+        return;
+    }
+
+    window.location.href = `product.html?id=${id}`;
+
+});
+
       card.querySelector('.pc-quickview').addEventListener('click', () => openQuickView(id));
       card.querySelector('.pc-cart').addEventListener('click', (e) => addToCart(id, 1, e.target.closest('.pc-icon-btn')));
       card.querySelector('.pc-add').addEventListener('click', (e) => addToCart(id, 1, e.currentTarget));
@@ -642,7 +654,7 @@
     document.getElementById('qvPrice').textContent = money(p.price);
     document.getElementById('qvDesc').textContent = p.desc;
 
-    document.getElementById('qvImage').innerHTML = `
+   document.getElementById('qvImage').innerHTML = `
     <img
         src="${p.image}"
         alt="${p.name}"
