@@ -33,3 +33,19 @@ product.gallery.forEach(img => {
     thumbs.appendChild(image);
 
 });
+
+// Add To Cart
+document.getElementById("addCartBtn").addEventListener("click", () => {
+
+    alert(product.name + " added to cart!");
+
+    // Baad me yahan localStorage/cart code add karenge.
+
+});
+
+// Buy Now
+document.getElementById("buyNowBtn").addEventListener("click", () => {
+
+    window.location.href = "checkout.html?id=" + product.id;
+
+});
