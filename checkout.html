@@ -15,12 +15,39 @@
 
 <body>
 
-<h1 style="text-align:center;margin-top:100px;">
-Checkout Page
-</h1>
+<div style="max-width:700px;margin:80px auto;color:white;padding:20px;">
+
+    <h1>Checkout</h1>
+
+    <div id="checkoutProduct"></div>
+
+</div>
 
 <script src="js/products.js"></script>
-<script src="js/script.js"></script>
+
+<script>
+
+const item = JSON.parse(localStorage.getItem("buyNowProduct"));
+
+if(item){
+
+    const product = PRODUCTS.find(p => p.id === item.id);
+
+    document.getElementById("checkoutProduct").innerHTML = `
+
+        <img src="${product.image}" width="250">
+
+        <h2>${product.name}</h2>
+
+        <h3>₹${product.price}</h3>
+
+        <p>Quantity : ${item.qty}</p>
+
+    `;
+
+}
+
+</script>
 
 </body>
 
