@@ -113,50 +113,55 @@ qtyInput.value=qty;
 
 };
 
-const shareBtn=document.querySelector(".share-btn");
+const shareBtn = document.querySelector(".share-btn");
 
-if(shareBtn){
+if (shareBtn) {
 
-shareBtn.onclick=()=>{
+    shareBtn.onclick = () => {
 
-if (navigator.share) {
+        if (navigator.share) {
 
-    navigator.share({
-        title: product.name,
-        text: product.desc,
-        url: window.location.href
-    });
+            navigator.share({
+                title: product.name,
+                text: product.desc,
+                url: window.location.href
+            });
 
-} else {
+        } else {
 
-    navigator.clipboard.writeText(window.location.href);
+            navigator.clipboard.writeText(window.location.href);
 
-    alert("Product link copied!");
+            alert("Product link copied!");
+
+        }
+
+    };
 
 }
 
+
+const wishBtn = document.querySelector(".wishlist-btn");
+
+if (wishBtn) {
+
+    wishBtn.onclick = () => {
+
+        let wishlist =
+            JSON.parse(localStorage.getItem("wishlist")) || [];
+
+        if (!wishlist.includes(product.id)) {
+
+            wishlist.push(product.id);
+
+            localStorage.setItem(
+                "wishlist",
+                JSON.stringify(wishlist)
+            );
+
+        }
+
+        wishBtn.classList.toggle("active");
+
+    };
+
 }
-
-  }
-
-const wishBtn=document.querySelector(".wishlist-btn");
-
-wishBtn.onclick = () => {
-
-    let wishlist =
-        JSON.parse(localStorage.getItem("wishlist")) || [];
-
-    if(!wishlist.includes(product.id)){
-
-        wishlist.push(product.id);
-
-        localStorage.setItem(
-            "wishlist",
-            JSON.stringify(wishlist)
-        );
-
-    }
-
-    wishBtn.classList.toggle("active");
-
-};
