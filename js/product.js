@@ -37,9 +37,22 @@ product.gallery.forEach(img => {
 // Add To Cart
 document.getElementById("addCartBtn").addEventListener("click", () => {
 
-    alert(product.name + " added to cart!");
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-    // Baad me yahan localStorage/cart code add karenge.
+    const existing = cart.find(item => item.id === product.id);
+
+    if (existing) {
+        existing.qty += 1;
+    } else {
+        cart.push({
+            id: product.id,
+            qty: 1
+        });
+    }
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+
+    alert(product.name + " added to cart!");
 
 });
 
