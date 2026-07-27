@@ -1,4 +1,4 @@
- const PRODUCTS = [
+ window.PRODUCTS = [
 
    {
     id: "dbz001",
