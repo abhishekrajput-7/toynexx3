@@ -44,8 +44,14 @@ document.getElementById("addCartBtn").addEventListener("click", () => {
 });
 
 // Buy Now
+
 document.getElementById("buyNowBtn").addEventListener("click", () => {
 
-    window.location.href = "checkout.html?id=" + product.id;
+    localStorage.setItem("buyNowProduct", JSON.stringify({
+        id: product.id,
+        qty: 1
+    }));
+
+    window.location.href = "checkout.html";
 
 });
