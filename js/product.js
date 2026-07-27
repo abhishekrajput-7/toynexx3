@@ -9,25 +9,45 @@ if (!product) {
 }
 
 document.getElementById("productName").textContent = product.name;
+
 document.getElementById("productPrice").textContent = `₹${product.price}`;
+
 document.getElementById("productDescription").textContent = product.desc;
 
-document.getElementById("mainProductImage").src = product.image;
+document.getElementById("longDescription").textContent =
+product.longDesc || product.desc;
+
+document.getElementById("mainProductImage").src =
+product.image;
 
 const thumbs = document.querySelector(".thumbnail-gallery");
 
 thumbs.innerHTML = "";
 
-product.gallery.forEach(img => {
+const galleryImages =
+product.gallery && product.gallery.length
+? product.gallery
+: [product.image];
 
-    const image = document.createElement("img");
+galleryImages.forEach((img,index)=>{
 
-    image.src = img;
+    const image=document.createElement("img");
 
-    image.className = "thumb";
+    image.src=img;
 
-    image.onclick = () => {
-        document.getElementById("mainProductImage").src = img;
+    if(index===0){
+        image.style.border="2px solid #ffb703";
+    }
+
+    image.onclick=()=>{
+
+        document.getElementById("mainProductImage").src=img;
+
+        document.querySelectorAll(".thumbnail-gallery img")
+        .forEach(i=>i.style.border="2px solid transparent");
+
+        image.style.border="2px solid #ffb703";
+
     };
 
     thumbs.appendChild(image);
@@ -42,11 +62,11 @@ document.getElementById("addCartBtn").addEventListener("click", () => {
     const existing = cart.find(item => item.id === product.id);
 
     if (existing) {
-        existing.qty += 1;
+        existing.qty += qty;
     } else {
         cart.push({
             id: product.id,
-            qty: 1
+            qty:qty
         });
     }
 
@@ -62,9 +82,81 @@ document.getElementById("buyNowBtn").addEventListener("click", () => {
 
     localStorage.setItem("buyNowProduct", JSON.stringify({
         id: product.id,
-        qty: 1
+        qty:qty
     }));
 
     window.location.href = "checkout.html";
 
 });
+
+let qty = 1;
+
+const qtyInput = document.getElementById("qtyInput");
+
+document.getElementById("plusQty").onclick = () => {
+
+qty++;
+
+qtyInput.value = qty;
+
+};
+
+document.getElementById("minusQty").onclick = () => {
+
+if(qty>1){
+
+qty--;
+
+qtyInput.value=qty;
+
+}
+
+};
+
+const shareBtn=document.querySelector(".share-btn");
+
+if(shareBtn){
+
+shareBtn.onclick=()=>{
+
+if (navigator.share) {
+
+    navigator.share({
+        title: product.name,
+        text: product.desc,
+        url: window.location.href
+    });
+
+} else {
+
+    navigator.clipboard.writeText(window.location.href);
+
+    alert("Product link copied!");
+
+}
+
+}
+
+  }
+
+const wishBtn=document.querySelector(".wishlist-btn");
+
+wishBtn.onclick = () => {
+
+    let wishlist =
+        JSON.parse(localStorage.getItem("wishlist")) || [];
+
+    if(!wishlist.includes(product.id)){
+
+        wishlist.push(product.id);
+
+        localStorage.setItem(
+            "wishlist",
+            JSON.stringify(wishlist)
+        );
+
+    }
+
+    wishBtn.classList.toggle("active");
+
+};
