@@ -150,8 +150,10 @@ document.getElementById("buyNowBtn").addEventListener("click", () => {
 
     localStorage.setItem("buyNowProduct", JSON.stringify({
         id: product.id,
-        qty:qty
+        qty: qty
     }));
+
+    localStorage.setItem("checkoutType", "buyNow");
 
     window.location.href = "checkout.html";
 

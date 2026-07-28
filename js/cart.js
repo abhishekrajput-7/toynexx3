@@ -202,8 +202,9 @@ document
 .getElementById("checkoutBtn")
 .onclick = () => {
 
-    window.location.href =
-        "checkout.html";
+    localStorage.setItem("checkoutType", "cart");
+
+    window.location.href = "checkout.html";
 
 };
 
