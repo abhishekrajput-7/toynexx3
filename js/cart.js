@@ -97,4 +97,118 @@ function renderCart() {
 `;
 
     });
+
+
+    const deliveryCharge = sub > 0 ? 50 : 0;
+
+const discount = 0;
+
+subtotal.textContent = `₹${sub}`;
+
+delivery.textContent = `₹${deliveryCharge}`;
+
+discountAmount.textContent = `₹${discount}`;
+
+grandTotal.textContent = `₹${sub + deliveryCharge - discount}`;
+
+// ==========================
+// Quantity +
+// ==========================
+
+function increaseQty(id){
+
+    const item =
+        cart.find(p => p.id === id);
+
+    if(item){
+
+        item.qty++;
+
+    }
+
+    localStorage.setItem(
+        "cart",
+        JSON.stringify(cart)
+    );
+
+    renderCart();
+
+}
+
+// ==========================
+// Quantity -
+// ==========================
+
+function decreaseQty(id){
+
+    const item =
+        cart.find(p => p.id === id);
+
+    if(item){
+
+        item.qty--;
+
+        if(item.qty <= 0){
+
+            cart =
+                cart.filter(p => p.id !== id);
+
+        }
+
+    }
+
+    localStorage.setItem(
+        "cart",
+        JSON.stringify(cart)
+    );
+
+    renderCart();
+
+}
+
+// ==========================
+// Remove Item
+// ==========================
+
+function removeItem(id){
+
+    cart =
+        cart.filter(p => p.id !== id);
+
+    localStorage.setItem(
+        "cart",
+        JSON.stringify(cart)
+    );
+
+    renderCart();
+
+}
+
+// ==========================
+// Buttons
+// ==========================
+
+document
+.getElementById("continueBtn")
+.onclick = () => {
+
+    window.location.href = "index.html";
+
+};
+
+document
+.getElementById("checkoutBtn")
+.onclick = () => {
+
+    window.location.href =
+        "checkout.html";
+
+};
+
+// ==========================
+// Start
+// ==========================
+
+renderCart(); 
+
 }
