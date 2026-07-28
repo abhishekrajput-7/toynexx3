@@ -49,8 +49,12 @@ input,select,textarea{width:100%;padding:12px;background:#0A0A0C;color:#fff;bord
 
 <script src="js/products.js"></script>
 <script>
-const buy=JSON.parse(localStorage.getItem("buyNowProduct"));
-if(buy){
+const checkoutType = localStorage.getItem("checkoutType");
+
+const buy = JSON.parse(localStorage.getItem("buyNowProduct"));
+
+const cart = JSON.parse(localStorage.getItem("cart")) || [];
+if(checkoutType === "buyNow" && buy){
  const p=PRODUCTS.find(x=>x.id===buy.id);
  if(p){
   const total=(Number(p.price)*buy.qty)+50;
@@ -62,6 +66,37 @@ if(buy){
   document.getElementById("total").textContent="₹"+total;
  }
 }
+
+if (checkoutType === "cart") {
+
+    let total = 50;
+    let html = "";
+
+    cart.forEach(item => {
+
+        const p = PRODUCTS.find(x => x.id === item.id);
+
+        if (!p) return;
+
+        total += p.price * item.qty;
+
+        html += `
+            <div style="margin-bottom:20px">
+                <img src="${p.image}">
+                <h3>${p.name}</h3>
+                <p>Price: ₹${p.price}</p>
+                <p>Quantity: ${item.qty}</p>
+            </div>
+        `;
+
+    });
+
+    document.getElementById("summary").innerHTML = html;
+
+    document.getElementById("total").textContent = "₹" + total;
+
+}
+
 </script>
 </body>
 </html>
