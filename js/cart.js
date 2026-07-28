@@ -111,6 +111,8 @@ discountAmount.textContent = `₹${discount}`;
 
 grandTotal.textContent = `₹${sub + deliveryCharge - discount}`;
 
+}
+
 // ==========================
 // Quantity +
 // ==========================
@@ -210,5 +212,3 @@ document
 // ==========================
 
 renderCart(); 
-
-}
