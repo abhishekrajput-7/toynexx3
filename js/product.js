@@ -131,6 +131,8 @@ document.getElementById("addCartBtn").addEventListener("click", () => {
 
 if (!existing) {
 
+    console.log("Current Qty =", qty);
+
     cart.push({
         id: product.id,
         qty: qty
