@@ -1,0 +1,61 @@
+/* ======================================
+   CART PAGE
+====================================== */
+
+body{
+
+    margin:0;
+
+    background:#070707;
+
+    color:#ffffff;
+
+    font-family:Poppins,sans-serif;
+
+}
+
+.cart-page{
+
+    width:min(1400px,92%);
+
+    margin:40px auto;
+
+}
+
+.cart-header{
+
+    text-align:center;
+
+    margin-bottom:50px;
+
+}
+
+.cart-header h1{
+
+    font-size:42px;
+
+    color:#FFD700;
+
+    margin-bottom:10px;
+
+}
+
+.cart-header p{
+
+    color:#aaa;
+
+    font-size:17px;
+
+}
+
+.cart-layout{
+
+    display:grid;
+
+    grid-template-columns:2fr 1fr;
+
+    gap:35px;
+
+    align-items:start;
+
+}
