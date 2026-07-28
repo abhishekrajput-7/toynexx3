@@ -20,6 +20,64 @@ product.longDesc || product.desc;
 document.getElementById("mainProductImage").src =
 product.image;
 
+// ==========================
+// Premium Product Data
+// ==========================
+
+// Badge
+const badge = document.getElementById("productBadge");
+
+if (badge) {
+    badge.textContent = product.badge || "Premium";
+}
+
+// Old Price
+const oldPrice = document.getElementById("oldPrice");
+
+if (oldPrice) {
+
+    if (product.oldPrice) {
+
+        oldPrice.textContent = `₹${product.oldPrice}`;
+
+    } else {
+
+        oldPrice.style.display = "none";
+
+    }
+
+}
+
+// Discount
+const discount = document.getElementById("discount");
+
+if (discount) {
+
+    if (product.oldPrice) {
+
+        const off = Math.round(
+            ((product.oldPrice - product.price) / product.oldPrice) * 100
+        );
+
+        discount.textContent = `${off}% OFF`;
+
+    } else {
+
+        discount.style.display = "none";
+
+    }
+
+}
+
+// Stock
+const stockText = document.getElementById("stockText");
+
+if (stockText) {
+
+    stockText.textContent = `In Stock (${product.stock || 0} left)`;
+
+}
+
 const thumbs = document.querySelector(".thumbnail-gallery");
 
 thumbs.innerHTML = "";

@@ -34,8 +34,22 @@
     "Images/Dragon Ball Z/goku-ssj2-white-stand-6.png"
     ],
 
-    desc: "Premium Dragon Ball Z Goku Super Saiyan 2 action figure with white display stand."
+   desc: "Premium Dragon Ball Z Goku Super Saiyan 2 action figure with white display stand.",
+
+longDesc:
+"Official Dragon Ball Z collectible made with premium PVC material. Features anime-accurate sculpting, vibrant paintwork, durable finish, and a premium display stand. Perfect for collectors and anime fans.",
+
+reviews: 128,
+
+stock: 24,
+
+badge: "Limited Edition",
+
+discount: 0
+
 },
+
+
 
     { id: 'p02', name: 'Void Ronin',        category: 'Anime Legends',   price: 5299, oldPrice: null, edition: 112, total: 800, tag: null,        rating: 4.3, sold: 540,  added: 9,  desc: 'A lone blade-wielder frozen in a decisive stance, finished with a weathered steel palette.' },
     { id: 'p03', name: 'Iron Marshal',      category: 'Superhero Icons', price: 8999, oldPrice: null, edition: 9,   total: 250, tag: 'Bestseller',rating: 4.9, sold: 890,  added: 3,  desc: 'Heavy-plated armor sculpt with articulated joints and illuminated chest core detailing.' },
