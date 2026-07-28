@@ -112,6 +112,16 @@ galleryImages.forEach((img,index)=>{
 
 });
 
+// Rating
+const ratingText = document.getElementById("ratingText");
+
+if (ratingText) {
+
+    ratingText.textContent =
+        `${product.rating || 0} • ${product.reviews || 0} Reviews`;
+
+}
+
 // Add To Cart
 document.getElementById("addCartBtn").addEventListener("click", () => {
 
