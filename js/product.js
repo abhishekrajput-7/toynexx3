@@ -129,21 +129,21 @@ document.getElementById("addCartBtn").addEventListener("click", () => {
 
     const existing = cart.find(item => item.id === product.id);
 
-    if (existing) {
-        existing.qty += qty;
-    } else {
-        cart.push({
-            id: product.id,
-            qty:qty
-        });
-    }
+if (!existing) {
+
+    cart.push({
+        id: product.id,
+        qty: qty
+    });
+
+}
 
     localStorage.setItem("cart", JSON.stringify(cart));
 
     //alert(product.name + " added to cart!");
     
     window.location.href = "cart.html";
-    
+
 });
 
 // Buy Now
