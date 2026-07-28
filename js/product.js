@@ -233,3 +233,39 @@ if (wishBtn) {
     };
 
 }
+
+// ==========================
+// Related Products
+// ==========================
+
+const relatedContainer = document.getElementById("relatedProducts");
+
+if (relatedContainer) {
+
+    const relatedProducts = PRODUCTS.filter(p =>
+        p.category === product.category &&
+        p.id !== product.id
+    ).slice(0, 4);
+
+    relatedContainer.innerHTML = "";
+
+    relatedProducts.forEach(item => {
+
+        relatedContainer.innerHTML += `
+
+        <div class="product-card"
+             onclick="location.href='product.html?id=${item.id}'">
+
+            <img src="${item.image}" alt="${item.name}">
+
+            <h3>${item.name}</h3>
+
+            <p>₹${item.price}</p>
+
+        </div>
+
+        `;
+
+    });
+
+}
