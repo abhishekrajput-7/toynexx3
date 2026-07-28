@@ -140,7 +140,7 @@ document.getElementById("addCartBtn").addEventListener("click", () => {
 
     localStorage.setItem("cart", JSON.stringify(cart));
 
-    alert(product.name + " added to cart!");
+    //alert(product.name + " added to cart!");
 
 });
 
