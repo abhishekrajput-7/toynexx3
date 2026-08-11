@@ -1,1 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Checkout | TOYNEXX</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        .checkout-page {
+            max-width: 1200px;
+            margin: 120px auto 60px;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 1.2fr .8fr;
+            gap: 30px;
+        }
+
+        .card {
+            background: #16161A;
+            border: 1px solid rgba(255, 255, 255, .08);
+            border-radius: 10px;
+            padding: 24px;
+        }
+
+        .card h2 {
+            margin-top: 0;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .grid .full {
+            grid-column: 1 / -1;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            background: #0A0A0C;
+            color: #fff;
+            border: 1px solid #333;
+            border-radius: 6px;
+            box-sizing: border-box;
+        }
+
+        input[type="radio"] {
+            width: auto;
+        }
+
+        .summary img {
+            width: 120px;
+            border-radius: 8px;
+        }
+
+        .row {
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 0;
+        }
+
+        .total {
+            font-size: 20px;
+            font-weight: bold;
+            border-top: 1px solid #333;
+            padding-top: 10px;
+        }
+
+        .payment-option {
+            display: block;
+            margin: 14px 0;
+            cursor: pointer;
+        }
+
+        .payment-option input {
+            margin-right: 8px;
+        }
+
+        #placeOrderBtn {
+            margin-top: 20px;
+            cursor: pointer;
+        }
+
+        @media(max-width:768px) {
+            .checkout-page {
+                grid-template-columns: 1fr;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="checkout-page">
+
+        <!-- SHIPPING DETAILS -->
+        <div class="card">
+
+            <h2>Shipping Details</h2>
+
+            <div class="grid">
+
+                <div>
+                    <label>Full Name</label>
+                    <input type="text" id="fullName" required>
+                </div>
+
+                <div>
+                    <label>Phone</label>
+                    <input type="tel" id="phone" required>
+                </div>
+
+                <div>
+                    <label>Email</label>
+                    <input type="email" id="email" required>
+                </div>
+
+                <div>
+                    <label>City</label>
+                    <input type="text" id="city" required>
+                </div>
+
+                <div class="full">
+                    <label>Address</label>
+                    <textarea id="address" rows="3" required></textarea>
+                </div>
+
+                <div>
+                    <label>State</label>
+                    <input type="text" id="state" required>
+                </div>
+
+                <div>
+                    <label>PIN Code</label>
+                    <input type="text" id="pinCode" required>
+                </div>
+
+            </div>
+
+
+            <!-- PAYMENT -->
+            <h2 style="margin-top:30px">Payment Method</h2>
+
+            <label class="payment-option">
+                <input type="radio" name="pay" value="cod" checked>
+                Cash on Delivery
+            </label>
+
+            <label class="payment-option">
+                <input type="radio" name="pay" value="online">
+                UPI / Debit Card / Credit Card
+            </label>
+
+
+            <button
+                id="placeOrderBtn"
+                class="btn btn-primary btn-block"
+                type="button">
+                Place Order
+            </button>
+
+        </div>
+
+
+        <!-- ORDER SUMMARY -->
+        <div class="card summary">
+
+            <h2>Order Summary</h2>
+
+            <div id="summary"></div>
+
+            <div class="row">
+                <span>Delivery</span>
+                <span>₹50</span>
+            </div>
+
+            <div class="row">
+                <span>GST</span>
+                <span>₹0</span>
+            </div>
+
+            <div class="row total">
+                <span>Total</span>
+                <span id="total">₹0</span>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- PRODUCTS DATA -->
+    <script src="js/products.js"></script>
+
+    <!-- RAZORPAY CHECKOUT -->
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+
+    <script>
+
+        /* =========================================
+           CHECKOUT DATA
+        ========================================= */
+
+        const checkoutType =
+            localStorage.getItem("checkoutType");
+
+        const buyNowProduct =
+            JSON.parse(localStorage.getItem("buyNowProduct"));
+
+        const cart =
+            JSON.parse(localStorage.getItem("cart")) || [];
+
+
+        let finalTotal = 0;
+
+
+        /* =========================================
+           BUY NOW
+        ========================================= */
+
+        if (checkoutType === "buyNow" && buyNowProduct) {
+
+            const product =
+                PRODUCTS.find(
+                    item => item.id === buyNowProduct.id
+                );
+
+            if (product) {
+
+                finalTotal =
+                    (Number(product.price) *
+                        Number(buyNowProduct.qty)) + 50;
+
+                document.getElementById("summary").innerHTML = `
+
+                    <div style="margin-bottom:20px">
+
+                        <img src="${product.image}">
+
+                        <h3>${product.name}</h3>
+
+                        <p>
+                            Price: ₹${product.price}
+                        </p>
+
+                        <p>
+                            Quantity: ${buyNowProduct.qty}
+                        </p>
+
+                    </div>
+
+                `;
+
+            }
+
+        }
+
+
+        /* =========================================
+           CART CHECKOUT
+        ========================================= */
+
+        if (checkoutType === "cart") {
+
+            let html = "";
+
+            let subtotal = 0;
+
+
+            cart.forEach(item => {
+
+                const product =
+                    PRODUCTS.find(
+                        p => p.id === item.id
+                    );
+
+                if (!product) return;
+
+
+                const quantity =
+                    Number(item.qty) || 1;
+
+
+                subtotal +=
+                    Number(product.price) * quantity;
+
+
+                html += `
+
+                    <div style="margin-bottom:20px">
+
+                        <img src="${product.image}">
+
+                        <h3>${product.name}</h3>
+
+                        <p>
+                            Price: ₹${product.price}
+                        </p>
+
+                        <p>
+                            Quantity: ${quantity}
+                        </p>
+
+                    </div>
+
+                `;
+
+            });
+
+
+            finalTotal = subtotal + 50;
+
+
+            document.getElementById("summary").innerHTML =
+                html;
+
+        }
+
+
+        /* =========================================
+           SHOW TOTAL
+        ========================================= */
+
+        document.getElementById("total").textContent =
+            "₹" + finalTotal;
+
+
+
+        /* =========================================
+           PLACE ORDER
+        ========================================= */
+
+        document
+            .getElementById("placeOrderBtn")
+            .addEventListener("click", async function () {
+
+
+                /* GET SHIPPING DETAILS */
+
+                const fullName =
+                    document.getElementById("fullName").value.trim();
+
+                const phone =
+                    document.getElementById("phone").value.trim();
+
+                const email =
+                    document.getElementById("email").value.trim();
+
+                const city =
+                    document.getElementById("city").value.trim();
+
+                const address =
+                    document.getElementById("address").value.trim();
+
+                const state =
+                    document.getElementById("state").value.trim();
+
+                const pinCode =
+                    document.getElementById("pinCode").value.trim();
+
+
+                /* VALIDATION */
+
+                if (
+                    !fullName ||
+                    !phone ||
+                    !email ||
+                    !city ||
+                    !address ||
+                    !state ||
+                    !pinCode
+                ) {
+
+                    alert(
+                        "Please fill all shipping details."
+                    );
+
+                    return;
+                }
+
+
+                /* PAYMENT METHOD */
+
+                const paymentMethod =
+                    document.querySelector(
+                        'input[name="pay"]:checked'
+                    ).value;
+
+
+                /* =================================
+                   CASH ON DELIVERY
+                ================================= */
+
+                if (paymentMethod === "cod") {
+
+                    alert(
+                        "Order placed successfully! Payment: Cash on Delivery"
+                    );
+
+                    return;
+                }
+
+
+                /* =================================
+                   ONLINE PAYMENT
+                ================================= */
+
+                try {
+
+                    const response =
+                        await fetch(
+                            "http://localhost:3000/create-order",
+                            {
+                                method: "POST",
+
+                                headers: {
+                                    "Content-Type":
+                                        "application/json"
+                                },
+
+                                body: JSON.stringify({
+                                    amount: finalTotal
+                                })
+                            }
+                        );
+
+
+                    const data =
+                        await response.json();
+
+
+                    if (!data.success) {
+
+                        alert(
+                            "Unable to create payment order."
+                        );
+
+                        return;
+                    }
+
+
+                    /* =================================
+                       RAZORPAY OPTIONS
+                    ================================= */
+
+                    const options = {
+
+                        key: "YOUR_RAZORPAY_KEY_ID",
+
+                        amount: data.order.amount,
+
+                        currency: "INR",
+
+                        name: "TOYNEXX",
+
+                        description:
+                            "TOYNEXX Collectibles Order",
+
+                        order_id:
+                            data.order.id,
+
+
+                        prefill: {
+
+                            name: fullName,
+
+                            email: email,
+
+                            contact: phone
+
+                        },
+
+
+                        notes: {
+
+                            address: address,
+
+                            city: city,
+
+                            state: state,
+
+                            pinCode: pinCode
+
+                        },
+
+
+                        theme: {
+
+                            color: "#FFD000"
+
+                        },
+
+
+                        handler: function (response) {
+
+                            console.log(
+                                "Payment Successful:",
+                                response
+                            );
+
+
+                            alert(
+                                "Payment Successful! 🎉"
+                            );
+
+
+                            /*
+                              Later we will add:
+                              - Payment verification
+                              - Order database
+                              - Order ID
+                              - Email confirmation
+                            */
+
+                        }
+
+                    };
+
+
+                    const razorpay =
+                        new Razorpay(options);
+
+
+                    razorpay.open();
+
+
+                }
+
+                catch (error) {
+
+                    console.error(
+                        "Payment Error:",
+                        error
+                    );
+
+
+                    alert(
+                        "Payment server is not reachable."
+                    );
+
+                }
+
+            });
+
+    </script>
+
+</body>
+
+</html>
