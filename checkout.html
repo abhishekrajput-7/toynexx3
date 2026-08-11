@@ -282,10 +282,10 @@
 
             cart.forEach(item => {
 
-                const product =
-                    PRODUCTS.find(
-                        p => p.id === item.id
-                    );
+               const product =
+                 window.PRODUCTS.find(
+                  p => String(p.id) === String(item.id)
+                  );
 
                 if (!product) return;
 
