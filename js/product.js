@@ -131,11 +131,13 @@ document.getElementById("addCartBtn").addEventListener("click", () => {
 
 if (!existing) {
 
-    console.log("Current Qty =", qty);
+    const selectedQty = parseInt(qtyInput.value, 10) || 1;
+
+    console.log("Current Qty =", selectedQty);
 
     cart.push({
         id: product.id,
-        qty: qty
+        qty: selectedQty
     });
 
 }
