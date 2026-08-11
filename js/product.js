@@ -171,11 +171,12 @@ const qtyInput = document.getElementById("qtyInput");
 
 document.getElementById("plusQty").onclick = () => {
 
-qty++;
+    qty++;
 
-qtyInput.value = qty;
+    qtyInput.value = qty;
 
 };
+
 
 document.getElementById("minusQty").onclick = () => {
 
