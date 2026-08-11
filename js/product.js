@@ -125,29 +125,31 @@ if (ratingText) {
 // Add To Cart
 document.getElementById("addCartBtn").addEventListener("click", () => {
 
+    // Get current cart
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-    const existing = cart.find(item => item.id === product.id);
-
-if (!existing) {
-
+    // Get selected quantity from quantity input
     const selectedQty = parseInt(qtyInput.value, 10) || 1;
 
-    console.log("Current Qty =", selectedQty);
+    // Check if product already exists in cart
+    const existing = cart.find(item => item.id === product.id);
 
-    cart.push({
-        id: product.id,
-        qty: selectedQty
-    });
+    if (existing) {
+        // Product already in cart → increase its quantity
+        existing.qty += selectedQty;
+    } else {
+        // New product → add with selected quantity
+        cart.push({
+            id: product.id,
+            qty: selectedQty
+        });
+    }
 
-}
-
+    // Save updated cart
     localStorage.setItem("cart", JSON.stringify(cart));
 
-    //alert(product.name + " added to cart!");
-    
+    // Go to cart
     window.location.href = "cart.html";
-
 });
 
 // Buy Now
